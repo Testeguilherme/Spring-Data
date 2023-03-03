@@ -3,23 +3,23 @@ package br.alura.com.spring.data.orm;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "cargos")
-public class Cargo 
-{
+@Table(name = "unidade_trabalho")
+public class UnidadeTrabalho {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	@OneToMany (mappedBy = "cargo")
+	private String endereco;
+	@ManyToMany(mappedBy = "unidadeTrabalhos", fetch = FetchType.EAGER)
 	private List<Funcionario> funcionarios;
 	
 	
@@ -35,14 +35,22 @@ public class Cargo
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Cargo [id=" + id + ", descricao=" + descricao + "]";
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
-	
-	
 
+	
+	
+	
+	
 }
