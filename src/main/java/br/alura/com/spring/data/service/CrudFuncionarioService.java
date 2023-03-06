@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.alura.com.spring.data.orm.Cargo;
@@ -47,10 +51,12 @@ public class CrudFuncionarioService {
 			switch (i) {
 			case 1: {
 				salvar(scanner);
+				break;
 			}
-//			case 2: {
-//				visualizar();
-//			}
+			case 2: {
+				visualizar(scanner);
+				break;
+			}
 //			case 3: {
 //				atualizar(scanner);
 //			}
@@ -85,7 +91,6 @@ public class CrudFuncionarioService {
 		Optional<Cargo> cargo = cargoRepository.findById(cargoId);
 		funcionario.setCargo(cargo.get());
 		funcionario.setUnidadeTrabalhos(unidades);
-		
 		funcionarioRepository.save(funcionario);
 		System.out.println("Salvo com sucesso!");
 	}
@@ -108,6 +113,22 @@ public class CrudFuncionarioService {
 		return unidades;
 	}
 
+	
+	private void visualizar(Scanner scanner) {
+		System.out.println("Qual a página que deseja ver?");
+		Integer pagina = scanner.nextInt();
+		
+		Pageable pageable = PageRequest.of(pagina, 5, Sort.unsorted()); 
+		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+
+		System.out.println(funcionarios);
+		System.out.println("Página atual: " + funcionarios.getNumber());
+		System.out.println("A aplicação possui um total de: " + funcionarios.getTotalPages() + " página(as)");
+		System.out.println("Total de elementos: " + funcionarios.getNumberOfElements());
+		funcionarios.forEach(list -> System.out.println(list));
+	}
+	
+	
 	
 	
 	

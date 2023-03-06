@@ -49,7 +49,10 @@ public class UnidadeTrabalho {
 	}
 	
 
-	
+	@Override
+	public String toString() {
+		return "Funcionário [id=" + id + ", descrição=" + descricao + ", endereco=" + endereco + " ]";
+	}
 	
 	
 	

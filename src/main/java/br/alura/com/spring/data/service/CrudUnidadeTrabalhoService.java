@@ -31,15 +31,19 @@ public class CrudUnidadeTrabalhoService {
 			switch (i) {
 			case 1: {
 				salvar(scanner);
+				break;
 			}
 			case 2: {
 				visualizar();
+				break;
 			}
 			case 3: {
 				atualizar(scanner);
+				break;
 			}
 			case 4: {
 				deletar(scanner);
+				break;
 			}
 			default:
 				system = false;

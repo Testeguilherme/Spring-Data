@@ -94,4 +94,9 @@ public class Funcionario
 		this.unidadeTrabalhos = unidadeTrabalhos;
 	}
 	
+	@Override
+	public String toString() {
+		return "Funcionário [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", salario=" + salario + " ]";
+	}
+	
 }
